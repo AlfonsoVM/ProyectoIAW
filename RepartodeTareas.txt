@@ -1,0 +1,13 @@
+Nina (
+    base de datos
+    usuarios de la base de datos
+    contraseñas
+    formulario
+    pagina principal diseño
+)
+
+Nino (
+    php login
+    pagina principal funcionalidad
+    carpeta personal por usuario donde se alojen las fotos
+)
