@@ -9,4 +9,5 @@ Nino (
     php login
     pagina principal funcionalidad
     carpeta personal por usuario donde se alojen las fotos
+    cambiar las contraseñas a md5
 )
