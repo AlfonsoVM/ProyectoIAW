@@ -9,7 +9,7 @@ hacer una aplicacion web (CON BASE DE DATOS) nombre, vargasacedo
 	si eres usuario registrado puedes subirlas y si no solo leerlas
 	
 	cuando se suba una foto, hay que guardar un fichero donde te 
-	diga la fota y su autor
+	diga la foto y su autor
 	
 	cada usuario nuevo una carpeta para cada uno (ana/foto1.png)
 	
