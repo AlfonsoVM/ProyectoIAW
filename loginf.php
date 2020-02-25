@@ -1,8 +1,6 @@
 <?php
     session_unset();
     session_destroy();
-
-    
     $username = trim(htmlspecialchars($_REQUEST["username"], ENT_QUOTES, "UTF-8"));
     $password = trim(htmlspecialchars($_REQUEST["password"], ENT_QUOTES, "UTF-8"));
 
