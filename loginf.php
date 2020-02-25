@@ -7,7 +7,7 @@
     $conexion = mysqli_connect("localhost", "root", "", "vargasacedo")
     or die("Problemas en la conexion");
     
-    $consulta = "SELECT * FROM usuarios WHERE usuario='$username' AND contrasena='$password'";
+    $consulta = "SELECT * FROM usuarios WHERE usuario='$username' AND contraseña='$password'";
     
     $registros = mysqli_query($conexion, $consulta) or die(mysqli_error($conexion));
     $count = mysqli_num_rows($registros);
