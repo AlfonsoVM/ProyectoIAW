@@ -4,7 +4,7 @@
    <meta charset="utf-8">
     <meta name="robots" content="noindex, nofollow">
 
-    <title>Agua´s Pictures</title>
+    <title>Agusures</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <style type="text/css">
