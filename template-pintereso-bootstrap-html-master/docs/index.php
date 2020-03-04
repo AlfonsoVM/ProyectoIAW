@@ -56,16 +56,37 @@
     <div class="container-fluid">
     	<div class="row">
     		<div class="card-columns">
-    			<div class="card card-pin">
-    				<img class="card-img" src="" alt="Card image">
-    				<div class="overlay">
-    					<h2 class="card-title title">Cool Title</h2>
-    					<div class="more">
-    						<a href="post.html">
-    						<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> Más </a>
-    					</div>
-    				</div>
-    			</div>
+								
+				<?php
+				$conexion = mysqli_connect("localhost", "root", "", "vargasacedo") or die("Problemas con la conexión");
+				$registros = mysqli_query($conexion, "SELECT  usuario, imagen, titulo, date
+														FROM imagenes ORDER BY ASC date")
+					or die("Problemas en la consulta:".mysqli_error($conexion));
+					
+				while ($reg = mysqli_fetch_array($registros)) {
+				echo "<div class='card card-pin'>";
+    				echo "<img class='card-img' src='imagenes/".$reg['usuario']."/".$reg['imagen']."' alt='Card image'>";
+    				echo "<div class='overlay'>";
+    					echo "<h2 class='card-title title'>".$reg['titulo']."</h2>";
+    					echo "<div class='more'>";
+    						echo "<h1>";
+    						echo "<i class='fa fa-arrow-circle-o-right' aria-hidden='true'></i>".$reg['usuario']."</h1>";
+    					echo "</div>";
+    				echo "</div>";
+				echo "</div>";
+				
+					/*
+					echo "<tr>";
+						echo "<td>" . $reg['usuario'] . "</td>";
+						echo "<td>" . "<img src='usuarios\\".$reg['usuario']."\\".$reg['nombre'].".jpg'/>" . "</td>";
+						echo "<td>" . $reg['fecha'] . "</td>";
+					echo "</tr>";
+					*/
+				}
+
+				mysqli_close($conexion);
+				?>
+				
     		</div>
     	</div>
     </div>
