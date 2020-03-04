@@ -180,7 +180,7 @@
 				<div class="myform form ">
 					 <div class="logo mb-3">
 						 <div class="col-md-12 text-center">
-							<h1>Inicio de Sesión</h1>
+							<h1>Registro</h1>
 						 </div>
 					</div>
                    <form action="loginf.php" method="post" name="login">
@@ -188,14 +188,17 @@
                               <input type="email" name="email"  class="form-control" id="email" aria-describedby="emailHelp" placeholder="Correo Electrónico">
                            </div>
                            <div class="form-group">
-                              <input type="password" name="password" id="password" class="form-control" aria-describedby="emailHelp" placeholder="Contraseña">
-                           </div>
-                           
-                           <div class="col-md-12 text-center ">
-                              <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm">Iniciar Sesión</button>
+                              <input type="usuario" name="usuario"  class="form-control" id="usuario" aria-describedby="emailHelp" placeholder="Usuario">
                            </div>
                            <div class="form-group">
-                              <p class="text-center">¿No tienes cuenta? <a href="signin.php" id="signup">Regístrate aquí</a></p>
+                              <input type="password" name="password" id="password" class="form-control" aria-describedby="emailHelp" placeholder="Contraseña">
+                          </div>
+                          
+                           <div class="col-md-12 text-center ">
+                              <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm">Registrarse</button>
+                           </div>
+                           <div class="form-group">
+                              <p class="text-center">¿Tienes ya una cuenta? <a href="login.php" id="signup">Inicia sesión aquí</a></p>
                            </div>
                         </form>
                  
