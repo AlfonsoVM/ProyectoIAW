@@ -1,6 +1,13 @@
+<?php
+session_start();
+if (empty($_SESSION['nombreUsuario']) && empty($_SESSION['estado'])) {
+	header('location: index.php?error=Sesion finalizada');
+if (isset($_SESSION['nombreUsuario']) && isset($_SESSION['estado'])) {
+	header('location: index.php?correcto=Sesion iniciada');
+} else {
+?>
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="es">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -74,7 +81,7 @@
     					echo "</div>";
     				echo "</div>";
 				echo "</div>";
-				
+
 					/*
 					echo "<tr>";
 						echo "<td>" . $reg['usuario'] . "</td>";
@@ -107,3 +114,6 @@
 </body>
     
 </html>
+<?php
+}
+?>
