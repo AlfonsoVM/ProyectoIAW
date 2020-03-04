@@ -40,6 +40,9 @@ session_start();
 			}
 			if (isset($_REQUEST["correctoC"])) {
 				print "<a class='nav-link' href='subirimagen.php'>Imágenes</a>";
+				if (isset($_SESSION['admin']) && $_SESSION['admin'] == true ) { 
+					print "<a class='nav-link' href='admin.php'>Administrar</a>";
+				}
 				print "<li class=nav-link style='color: green'> $_REQUEST[correctoC] </li>";
 			}
 			if (isset($_REQUEST["cerrar"])) {
