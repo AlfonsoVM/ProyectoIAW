@@ -34,15 +34,15 @@ html,body{
 <table class="tg">
   <tr>
     <th class="tg-fia5">Correo Electrónico</th>
-    <th class="tg-14gg"><input type="email" name="email" class="form-control" id="email" placeholder="Correo Electrónico"></th>
+    <th class="tg-14gg"><input type="email" name="email" id="email" placeholder="Correo Electrónico"></th>
   </tr>
   <tr>
     <td class="tg-06e6">Usuario</td>
-    <td class="tg-0lax"><input type="text" name="usuario" id="usuario" class="form-control" placeholder="Usuario"></td>
+    <td class="tg-0lax"><input type="text" name="usuario" id="usuario"  placeholder="Usuario"></td>
   </tr>
   <tr>
     <td class="tg-06e6">Contraseña</td>
-    <td class="tg-0lax"><input type="password" name="password" id="password" class="form-control"placeholder="Contraseña"></td>
+    <td class="tg-0lax"><input type="password" name="password" id="password" placeholder="Contraseña"></td>
   </tr>
   
 </table><br>
