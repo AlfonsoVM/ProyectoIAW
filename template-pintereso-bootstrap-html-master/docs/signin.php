@@ -27,7 +27,7 @@ html,body{
 </head>
 <body>
 <h1>Registro</h1>
-<form action="loginf.php" method="post" name="login">
+<form action="singinf.php" method="post" name="login">
 
 <div class="fondo">
 
