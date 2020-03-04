@@ -12,11 +12,11 @@
     $registros = mysqli_query($conexion, $consulta) or die(mysqli_error($conexion));
     $count = mysqli_num_rows($registros);
     if ($count != 1) {
-        header('location: login.php?error=Usuario o contraseña Incorrecta');
+        header('location: login.php?errorC=Usuario o contraseña Incorrecta');
     } else {
         session_start();
         $_SESSION['nombreUsuario'] = $username; 
         $_SESSION['estado'] = 'Autenticado';
-        header('location: administracion.php');
+        header('location: index.php?correctoC=Sesión iniciada');
     }
 ?>

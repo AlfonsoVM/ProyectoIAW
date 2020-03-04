@@ -40,6 +40,14 @@ html,body{
     <td class="tg-0lax"><input type="password" name="password" id="password" class="form-control"placeholder="Contraseña"></td>
   </tr>
 </table> <br>
+<?php
+if (isset($_REQUEST["errorC"])) {
+    	print "<p style='color: red'> $_REQUEST[errorC] </p>";
+	}
+	if (isset($_REQUEST["correctoC"])) {
+		print "<p style='color: green'> $_REQUEST[correctoC] </p>";
+  }
+?>
 <input type="submit" class="boton" value="Iniciar sesión"> 
                            <div class="form-group">
                               <p class="text-center">¿No tienes cuenta? <a href="signin.php" id="signup">Regístrate aquí</a></p>

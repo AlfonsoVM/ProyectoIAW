@@ -16,9 +16,9 @@
    $registrar =  "INSERT INTO usuarios (usuario, contraseña) VALUES ('$usuario', '$correo', '$contrasena')";
    
    if ($count != 0) {
-    header('location: login.php?errorR=El usuario ya existe');
+    header('location: signin.php?errorR=El usuario ya existe');
    } else {
     mysqli_query($conexion, $registrar) or die(mysqli_error($conexion));
-    header('location: login.php?correctoR=El usuario fue creado con exito');
+    header('location: signin.php?correctoR=El usuario fue creado con exito');
    }
  ?>
