@@ -9,7 +9,7 @@ session_start();
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Aguas</title>
+    <title>PhotoIAW</title>
     <script type="text/javascript"> (function() { var css = document.createElement('link'); css.href = 'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'; css.rel = 'stylesheet'; css.type = 'text/css'; document.getElementsByTagName('head')[0].appendChild(css); })(); </script>
     <link rel="stylesheet" href="assets/css/app.css">
 	<link rel="stylesheet" href="assets/css/theme.css">
@@ -24,6 +24,11 @@ session_start();
     <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarsDefault">
+		<ul class="navbar-nav mr-auto align-items-center">
+    		<li class="nav-item">
+				<h3><a href="index.php">PhotoIAW</a></h3>
+			</li>
+    	</ul>
     	<ul class="navbar-nav ml-auto align-items-center">
     		<li class="nav-item">
 				<a class="nav-link" href="login.php">Iniciar Sesión</a>
