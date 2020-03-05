@@ -1,5 +1,3 @@
-
-Learn more or give us feedback
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,6 +15,7 @@ html,body{
 .tg .tg-fia5{font-family:"Times New Roman", Times, serif !important;;text-align:left;vertical-align:top}
 .tg .tg-14gg{background-color:#ffffff;color:#000000;text-align:left;vertical-align:top}
 .tg .tg-0lax{text-align:left;vertical-align:top}
+
 .boton {border-radius: 8px;
         background-color: #33ACFF;
         color:white;}
@@ -27,32 +26,29 @@ html,body{
 
 </head>
 <body>
-<h1>Inicio de sesión </h1>
-<form action="loginf.php" method="post" name="login">
+<h1>Registro</h1>
+<form action="singinf.php" method="post" name="login">
 
 <div class="fondo">
 
 <table class="tg">
   <tr>
     <th class="tg-fia5">Correo Electrónico</th>
-    <th class="tg-14gg"><input type="email" name="email" class="form-control" id="email" placeholder="Correo Electrónico"></th>
+    <th class="tg-14gg"><input type="email" name="email" id="email" placeholder="Correo Electrónico"></th>
+  </tr>
+  <tr>
+    <td class="tg-06e6">Usuario</td>
+    <td class="tg-0lax"><input type="text" name="usuario" id="usuario"  placeholder="Usuario"></td>
   </tr>
   <tr>
     <td class="tg-06e6">Contraseña</td>
-    <td class="tg-0lax"><input type="password" name="password" id="password" class="form-control"placeholder="Contraseña"></td>
+    <td class="tg-0lax"><input type="password" name="password" id="password" placeholder="Contraseña"></td>
   </tr>
-</table> <br>
-<?php
-if (isset($_REQUEST["errorC"])) {
-    	print "<p style='color: red'> $_REQUEST[errorC] </p>";
-	}
-	if (isset($_REQUEST["correctoC"])) {
-		print "<p style='color: green'> $_REQUEST[correctoC] </p>";
-  }
-?>
-<input type="submit" class="boton" value="Iniciar sesión"> 
+  
+</table><br>
+<input type="submit" class="boton" value="Registrarse"> 
                            <div class="form-group">
-                              <p class="text-center">¿No tienes cuenta? <a href="signin.php" id="signup">Regístrate aquí</a></p>
+                              <p class="text-center">¿Ya tienes cuenta? <a href="login.php" id="signup">Inicia sesión aquí</a></p>
                            </div>
                         </form>
 </div>

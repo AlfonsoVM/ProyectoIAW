@@ -69,6 +69,8 @@ session_start();
     		<div class="card-columns">
 				<div class='card card-pin'>
                     <button type="button" class="btn btn-dark" onclick="window.location.href = 'adminusuarios.php'">Usuarios</button>
+                </div>
+                <div class='card card-pin'>
                     <button type="button" class="btn btn-dark" onclick="window.location.href = 'adminimagenes.php'">Imágenes</button>
                 </div>
     		</div>

@@ -1,58 +1,105 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio Sesión</title>
-    <style type="text/css">
-html,body{
-    background-color: powderblue;}
-
-.tg  {border-collapse:collapse;border-spacing:0;border-color:#9ABAD9;}
-.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#9ABAD9;color:#444;background-color:#EBF5FF;}
-.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#9ABAD9;color:#fff;background-color:#409cff;}
-.tg .tg-06e6{font-family:"Times New Roman", Times, serif !important;;background-color:#409cff;color:#ffffff;text-align:left;vertical-align:top}
-.tg .tg-fia5{font-family:"Times New Roman", Times, serif !important;;text-align:left;vertical-align:top}
-.tg .tg-14gg{background-color:#ffffff;color:#000000;text-align:left;vertical-align:top}
-.tg .tg-0lax{text-align:left;vertical-align:top}
-.boton {border-radius: 8px;
-        background-color: #33ACFF;
-        color:white;}
-    </style>
-
-
-
-
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>PhotoIAW</title>
+    <script type="text/javascript"> (function() { var css = document.createElement('link'); css.href = 'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'; css.rel = 'stylesheet'; css.type = 'text/css'; document.getElementsByTagName('head')[0].appendChild(css); })(); </script>
+    <link rel="stylesheet" href="assets/css/app.css">
+	<link rel="stylesheet" href="assets/css/theme.css">
+	
 </head>
+
 <body>
-<h1>Inicio de sesión </h1>
-<form action="loginf.php" method="post" name="login">
 
-<div class="fondo">
+	<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+    <a class="navbar-brand font-weight-bolder mr-3" href="index.php"><img src="assets/img/logo.png"></a>
+    <button class="navbar-light navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsDefault" aria-controls="navbarsDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarsDefault">
+        <ul class="navbar-nav mr-auto align-items-center">
+    		<li class="nav-item">
+				<h3><a href="index.php">PhotoIAW</a> / Iniciar Sesión</h3>
+			</li>
+    	</ul>
+    	<ul class="navbar-nav ml-auto align-items-center">
+    		<li class="nav-item">
+				<a class="nav-link" href="login.php">Iniciar Sesión</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="signin.php">Registrarse</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="logout.php">Cerrar Sesión</a>
+			</li>
+			<?php
+			if (isset($_REQUEST["error"])) {
+				print "<li class=nav-link style='color: red'> $_REQUEST[errorI] </li>";
+			}
+			if (isset($_REQUEST["correctoC"])) {
+				print "<a class='nav-link' href='subirimagen.php'>Imágenes</a>";
+				if (isset($_SESSION['admin']) && $_SESSION['admin'] == true ) { 
+					print "<a class='nav-link' href='admin.php'>Administrar</a>";
+				}
+				print "<li class=nav-link style='color: green'> $_REQUEST[correctoC] </li>";
+			}
+			if (isset($_REQUEST["cerrar"])) {
+				print "<li class=nav-link style='color: black'> $_REQUEST[cerrar] </li>";
+			}
+			?>
+    	</ul>
+    </div>
+    </nav>    
+    <main role="main">   
+	
+	
+    <section class="mt-4 mb-5">
+    <div class="container-fluid">
+    	<div class="row">
+    		<div class="card-columns">
+				  <div class='card card-pin'>
+          <form action="loginf.php" method="post">
+            <div class="form-group">
+              <label for="usuario">Usuario</label>
+              <input type="text" class="form-control" id="usuario">
+            </div>
+            <div class="form-group">
+              <label for="password">Contraseña</label>
+              <input type="password" class="form-control" id="password">
+            </div>
+            <button type="submit" class="btn btn-dark">Iniciar Sesión</button>
+            
+            <?php
+            if (isset($_REQUEST["errorC"])) {
+                  print "<p style='color: red'> $_REQUEST[errorC] </p>";
+              }
+              if (isset($_REQUEST["correctoC"])) {
+                print "<p style='color: green'> $_REQUEST[correctoC] </p>";
+              }
+            ?>
+            <br><br>
+            <div class="form-group">
+                  <p>¿No tienes cuenta? <a href="signin.php" id="signin">Regístrate aquí</a></p>
+            </div>
 
-<table class="tg">
-  <tr>
-    <th class="tg-fia5">Correo Electrónico</th>
-    <th class="tg-14gg"><input type="email" name="email" class="form-control" id="email" placeholder="Correo Electrónico"></th>
-  </tr>
-  <tr>
-    <td class="tg-06e6">Contraseña</td>
-    <td class="tg-0lax"><input type="password" name="password" id="password" class="form-control"placeholder="Contraseña"></td>
-  </tr>
-</table> <br>
-<?php
-if (isset($_REQUEST["errorC"])) {
-    	print "<p style='color: red'> $_REQUEST[errorC] </p>";
-	}
-	if (isset($_REQUEST["correctoC"])) {
-		print "<p style='color: green'> $_REQUEST[correctoC] </p>";
-  }
-?>
-<input type="submit" class="boton" value="Iniciar sesión"> 
-                           <div class="form-group">
-                              <p class="text-center">¿No tienes cuenta? <a href="signin.php" id="signup">Regístrate aquí</a></p>
-                           </div>
-                        </form>
-</div>
+          </form>
+          </div>
+    		</div>
+    	</div>
+    </div>
+    </section>    
+    </main>
+
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/theme.js"></script>
+    
+    <footer class="footer pt-5 pb-5 text-center">        
+    </footer>    
 </body>
 </html>
