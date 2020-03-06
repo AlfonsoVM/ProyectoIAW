@@ -1,5 +1,8 @@
 <?php
 session_start();
+if (empty($_SESSION['nombreUsuario']) && empty($_SESSION['estado'])) {
+    header('location: index.php?errorI=Debe iniciar sesión para subir imagenes');
+} else {
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,7 +28,7 @@ session_start();
     <div class="collapse navbar-collapse" id="navbarsDefault">
         <ul class="navbar-nav mr-auto align-items-center">
     		<li class="nav-item">
-				<h3><a href="index.php">PhotoIAW</a> / Registrarse</h3>
+            <h3><a href="index.php">PhotoIAW</a> / Cuenta</h3>
 			</li>
     	</ul>
     	<ul class="navbar-nav ml-auto align-items-center">
@@ -38,7 +41,7 @@ session_start();
 			<li class="nav-item">
 				<a class="nav-link" href="logout.php">Cerrar Sesión</a>
 			</li>
-      <?php
+            <?php
 			if (isset($_REQUEST["errorI"])) {
 				print "<li class=nav-link style='color: red'> $_REQUEST[errorI] </li>";
 			}
@@ -69,39 +72,36 @@ session_start();
     	<div class="row">
     		<div class="card-columns">
 				  <div class='card card-pin'>
-          <form action="signinf.php" method="post">
-            <div class="form-group">
-              <label for="correo">Correo Electrónico</label>
-              <input type="email" class="form-control" id="correo" name="correo" aria-describedby="emailHelp" required>
-              <small id="emailHelp" class="form-text text-muted">Nunca compartiremos tu dirección de correo con nadie.</small>
+                    <form action="actualizar.php" method="post" enctype="multipart/form-data">
+                    <h3>Cambiar credenciales</h3>
+                    <input type="hidden" id="usuario" name="usuario" value="<?php echo $_SESSION['nombreUsuario'];?>"> 
+                        
+                        <div class="form-group">
+                            <label for="correo">Correo</label>
+                            <input type="email" class="form-control" id="correo" name="correo" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contraseña">Contraseña</label>
+                            <input type="password" class="form-control" name="contraseña" id="contraseña" required>
+                        </div>
+                        <p>
+                            <br/>
+                            <input type="submit" class="btn btn-primary btn-block" value="Cambiar credenciales">
+                        </p>
+                        <p>
+                        <?php
+                        if (isset($_REQUEST["errorA"])) {
+                            print "<p style='color: red'> $_REQUEST[errorA] </p>";
+                        }
+                        if (isset($_REQUEST["correctoA"])) {
+                            print "<p style='color: green'> $_REQUEST[correctoA] </p>";
+                        }
+                        ?>
+                        </p>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-              <label for="usuario">Usuario</label>
-              <input type="text" class="form-control" id="usuario" name="usuario" required>
-            </div>
-            <div class="form-group">
-              <label for="contraseña">Contraseña</label>
-              <input type="password" class="form-control" id="contraseña" name="contraseña" required>
-            </div>
-            <button type="submit" class="btn btn-dark">Registrarse</button>
-            <br><br>
-            <?php
-            if (isset($_REQUEST["errorR"])) {
-                  print "<p style='color: red'> $_REQUEST[errorR] </p>";
-              }
-              if (isset($_REQUEST["correctoR"])) {
-                print "<p style='color: green'> $_REQUEST[correctoR] </p>";
-              }
-            ?>
-            
-            <div class="form-group">
-              <p>¿Ya tienes cuenta? <a href="login.php" id="login" name="login">Inicia sesión aquí</a></p>
-            </div>
-
-          </form>
-          </div>
-    		</div>
-    	</div>
+        </div>
     </div>
     </section>    
     </main>
@@ -113,3 +113,6 @@ session_start();
     </footer>    
 </body>
 </html>
+<?php
+}
+?>

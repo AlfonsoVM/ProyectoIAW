@@ -1,1 +1,6 @@
-Crear usuario admin desde Registrarse, ya que tiene más opciones.
+admin	1234
+antonio	1234
+alfonso	1234
+ana	1234
+
+Importar todos los SQL

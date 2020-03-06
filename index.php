@@ -1,4 +1,5 @@
 <?php
+error_reporting (E_ALL ^ E_NOTICE);
 session_start();
 ?>
 
@@ -43,15 +44,18 @@ session_start();
 			if (isset($_REQUEST["errorI"])) {
 				print "<li class=nav-link style='color: red'> $_REQUEST[errorI] </li>";
 			}
-			if (isset($_SESSION['nombreUsuario']) && isset($_SESSION['estado'])) {
+			if (isset($_SESSION['nombreUsuario']) && isset($_SESSION['estado']) && $_SESSION['nombreUsuario'] <> 'admin') {
 				print "<a class='nav-link' href='formuimagen.php'>Imágenes</a>";
-				if (isset($_SESSION['nombreUsuario']) && $_SESSION['nombreUsuario'] == 'admin') { 
-					print "<a class='nav-link' href='admin.php'>Administrar</a>";
-				}
-				if (isset($_REQUEST["correctoC"])) {
+			}
+			if (isset($_SESSION['nombreUsuario']) && isset($_SESSION['estado'])) {
+						print "<a class='nav-link' href='formucuenta.php'>Cuenta</a>";
+			}
+			if (isset($_SESSION['nombreUsuario']) && $_SESSION['nombreUsuario'] == 'admin') { 
+				print "<a class='nav-link' href='admin.php'>Administrar</a>";
+			}
+			if (isset($_REQUEST["correctoC"])) {
 				print "<li class=nav-link style='color: green'> $_REQUEST[correctoC] </li>";
-                }
-            }
+      		}      
 			if (isset($_REQUEST["cerrar"])) {
 				print "<li class=nav-link style='color: black'> $_REQUEST[cerrar] </li>";
 			}
@@ -64,15 +68,35 @@ session_start();
 	
     <section class="mt-4 mb-5">
     <div class="container-fluid">
+		<div>
+			<label style="font-size:150%; font-weight:bold;">Ordenar por:</label>
+            <button type="button" class="btn btn-dark" onclick="window.location.href = 'index.php?sort=autor'">Autor</button>
+			<button type="button" class="btn btn-dark" onclick="window.location.href = 'index.php?sort=fecha'">Fecha</button>
+			<br><br>
+        </div>
+		</div>
     	<div class="row">
     		<div class="card-columns">
-								
+						
 				<?php
+				$sort = $_GET['sort'];
+				
 				$conexion = mysqli_connect("localhost", "root", "", "vargasacedo") or die("Problemas con la conexión");
+				
 				$registros = mysqli_query($conexion, "SELECT  usuario, imagen, titulo, fecha
-														FROM imagenes ORDER BY fecha")
+													FROM imagenes ORDER BY fecha")
+				or die("Problemas en la consulta:".mysqli_error($conexion));
+
+				if ($sort == 'fecha') {
+				$registros = mysqli_query($conexion, "SELECT  usuario, imagen, titulo, fecha
+													FROM imagenes ORDER BY fecha")
+				or die("Problemas en la consulta:".mysqli_error($conexion));
+				} elseif ($sort == 'autor') {
+					$registros = mysqli_query($conexion, "SELECT  usuario, imagen, titulo, fecha
+														FROM imagenes ORDER BY usuario")
 					or die("Problemas en la consulta:".mysqli_error($conexion));
-					
+				}
+				
 				while ($reg = mysqli_fetch_array($registros)) {
 				echo "<div class='card card-pin'>";
     				echo "<img class='card-img' src='imagenes\\".$reg['usuario']."\\".$reg['imagen']."' alt='Card image'>";

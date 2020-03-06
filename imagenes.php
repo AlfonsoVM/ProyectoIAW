@@ -40,19 +40,22 @@ $usuario = $_SESSION['nombreUsuario'];
 			<li class="nav-item">
 				<a class="nav-link" href="logout.php">Cerrar Sesión</a>
 			</li>
-			<?php
+            <?php
 			if (isset($_REQUEST["errorI"])) {
 				print "<li class=nav-link style='color: red'> $_REQUEST[errorI] </li>";
 			}
-			if (isset($_SESSION['nombreUsuario']) && isset($_SESSION['estado'])) {
+			if (isset($_SESSION['nombreUsuario']) && isset($_SESSION['estado']) && $_SESSION['nombreUsuario'] <> 'admin') {
 				print "<a class='nav-link' href='formuimagen.php'>Imágenes</a>";
-				if (isset($_SESSION['nombreUsuario']) && $_SESSION['nombreUsuario'] == 'admin') { 
-					print "<a class='nav-link' href='admin.php'>Administrar</a>";
-				}
-				if (isset($_REQUEST["correctoC"])) {
+			}
+			if (isset($_SESSION['nombreUsuario']) && isset($_SESSION['estado'])) {
+						print "<a class='nav-link' href='formucuenta.php'>Cuenta</a>";
+			}
+			if (isset($_SESSION['nombreUsuario']) && $_SESSION['nombreUsuario'] == 'admin') { 
+				print "<a class='nav-link' href='admin.php'>Administrar</a>";
+			}
+			if (isset($_REQUEST["correctoC"])) {
 				print "<li class=nav-link style='color: green'> $_REQUEST[correctoC] </li>";
-                }
-            }
+      		}      
 			if (isset($_REQUEST["cerrar"])) {
 				print "<li class=nav-link style='color: black'> $_REQUEST[cerrar] </li>";
 			}
