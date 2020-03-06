@@ -1,6 +1,7 @@
 <?php
 session_start();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,9 +24,9 @@ session_start();
     <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarsDefault">
-        <ul class="navbar-nav mr-auto align-items-center">
+		<ul class="navbar-nav mr-auto align-items-center">
     		<li class="nav-item">
-				<h3><a href="index.php">PhotoIAW</a> / Registrarse</h3>
+				<h3><a href="index.php">PhotoIAW</a></h3>
 			</li>
     	</ul>
     	<ul class="navbar-nav ml-auto align-items-center">
@@ -39,16 +40,18 @@ session_start();
 				<a class="nav-link" href="logout.php">Cerrar Sesión</a>
 			</li>
 			<?php
-			if (isset($_REQUEST["error"])) {
+			if (isset($_REQUEST["errorI"])) {
 				print "<li class=nav-link style='color: red'> $_REQUEST[errorI] </li>";
 			}
-			if (isset($_REQUEST["correctoC"])) {
-				print "<a class='nav-link' href='subirimagen.php'>Imágenes</a>";
-				if (isset($_SESSION['admin']) && $_SESSION['admin'] == true ) { 
+			if (isset($_SESSION['nombreUsuario']) && isset($_SESSION['estado'])) {
+				print "<a class='nav-link' href='formuimagen.php'>Imágenes</a>";
+				if (isset($_SESSION['nombreUsuario']) && $_SESSION['nombreUsuario'] == 'admin') { 
 					print "<a class='nav-link' href='admin.php'>Administrar</a>";
 				}
+				if (isset($_REQUEST["correctoC"])) {
 				print "<li class=nav-link style='color: green'> $_REQUEST[correctoC] </li>";
-			}
+                }
+            }
 			if (isset($_REQUEST["cerrar"])) {
 				print "<li class=nav-link style='color: black'> $_REQUEST[cerrar] </li>";
 			}
@@ -63,38 +66,29 @@ session_start();
     <div class="container-fluid">
     	<div class="row">
     		<div class="card-columns">
-				  <div class='card card-pin'>
-          <form action="signinf.php" method="post">
-            <div class="form-group">
-              <label for="email">Correo Electrónico</label>
-              <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
-              <small id="emailHelp" class="form-text text-muted">Nunca compartiremos tu dirección de correo con nadie.</small>
-            </div>
-            <div class="form-group">
-              <label for="usuario">Usuario</label>
-              <input type="text" class="form-control" id="usuario">
-            </div>
-            <div class="form-group">
-              <label for="password">Contraseña</label>
-              <input type="password" class="form-control" id="password">
-            </div>
-            <button type="submit" class="btn btn-dark">Registrarse</button>
-            
-            <?php
-            if (isset($_REQUEST["errorC"])) {
-                  print "<p style='color: red'> $_REQUEST[errorC] </p>";
-              }
-              if (isset($_REQUEST["correctoC"])) {
-                print "<p style='color: green'> $_REQUEST[correctoC] </p>";
-              }
-            ?>
-            <br><br>
-            <div class="form-group">
-              <p>¿Ya tienes cuenta? <a href="login.php" id="login">Inicia sesión aquí</a></p>
-            </div>
+								
+				<?php
+				$conexion = mysqli_connect("localhost", "root", "", "vargasacedo") or die("Problemas con la conexión");
+				$registros = mysqli_query($conexion, "SELECT  usuario, imagen, titulo, fecha
+														FROM imagenes ORDER BY fecha")
+					or die("Problemas en la consulta:".mysqli_error($conexion));
+					
+				while ($reg = mysqli_fetch_array($registros)) {
+				echo "<div class='card card-pin'>";
+    				echo "<img class='card-img' src='imagenes\\".$reg['usuario']."\\".$reg['imagen']."' alt='Card image'>";
+    				echo "<div class='overlay'>";
+    					echo "<h2 class='card-title title'>".$reg['titulo']."</h2>";
+    					echo "<div class='more'>";
+    						echo "<h1>";
+    						echo "<i class='fa fa-arrow-circle-o-right' aria-hidden='true'></i>".$reg['usuario']."</h1>";
+    					echo "</div>";
+    				echo "</div>";
+				echo "</div>";
+				}
 
-          </form>
-          </div>
+				mysqli_close($conexion);
+				?>
+				
     		</div>
     	</div>
     </div>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 25-02-2020 a las 23:13:22
+-- Tiempo de generación: 06-03-2020 a las 04:40:21
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.2
 
@@ -30,11 +30,17 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `imagenes` (
   `usuario` varchar(20) NOT NULL,
-  `correo` varchar(50) NOT NULL,
   `imagen` varchar(50) NOT NULL,
-  `titulo` int(20) NOT NULL,
-  `descripcion` int(100) NOT NULL
+  `titulo` varchar(20) NOT NULL,
+  `fecha` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `imagenes`
+--
+
+INSERT INTO `imagenes` (`usuario`, `imagen`, `titulo`, `fecha`) VALUES
+('admin', 'Firefox_wallpaper.png', 'jgfjgj', '2020-03-06 04:20:26');
 
 -- --------------------------------------------------------
 
@@ -49,6 +55,14 @@ CREATE TABLE `usuarios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`usuario`, `correo`, `contraseña`) VALUES
+('admin', 'admin@admin', '1234'),
+('alfonso', 'vargasmesa.alfonso@gmail.com', '1234');
+
+--
 -- Índices para tablas volcadas
 --
 
@@ -56,13 +70,31 @@ CREATE TABLE `usuarios` (
 -- Indices de la tabla `imagenes`
 --
 ALTER TABLE `imagenes`
-  ADD PRIMARY KEY (`correo`);
+  ADD PRIMARY KEY (`imagen`);
 
 --
 -- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  ADD PRIMARY KEY (`correo`);
+  ADD PRIMARY KEY (`usuario`,`correo`);
+
+
+--
+-- Metadatos
+--
+USE `phpmyadmin`;
+
+--
+-- Metadatos para la tabla imagenes
+--
+
+--
+-- Metadatos para la tabla usuarios
+--
+
+--
+-- Metadatos para la base de datos vargasacedo
+--
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

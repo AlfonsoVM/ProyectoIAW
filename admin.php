@@ -1,9 +1,6 @@
 <?php
 session_start();
-/*if (isset($_SESSION['admin']) && $_SESSION['admin'] == true ) { 
-} else {
-    header('location: index.php?error=Sesion finalizada');
-}*/
+if (isset($_SESSION['nombreUsuario']) && $_SESSION['nombreUsuario'] == 'admin') {
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -43,16 +40,18 @@ session_start();
 				<a class="nav-link" href="logout.php">Cerrar Sesión</a>
 			</li>
 			<?php
-			if (isset($_REQUEST["error"])) {
+			if (isset($_REQUEST["errorI"])) {
 				print "<li class=nav-link style='color: red'> $_REQUEST[errorI] </li>";
 			}
-			if (isset($_REQUEST["correctoC"])) {
-				print "<a class='nav-link' href='subirimagen.php'>Imágenes</a>";
-				if (isset($_SESSION['admin']) && $_SESSION['admin'] == true ) { 
+			if (isset($_SESSION['nombreUsuario']) && isset($_SESSION['estado'])) {
+				print "<a class='nav-link' href='formuimagen.php'>Imágenes</a>";
+				if (isset($_SESSION['nombreUsuario']) && $_SESSION['nombreUsuario'] == 'admin') { 
 					print "<a class='nav-link' href='admin.php'>Administrar</a>";
 				}
+				if (isset($_REQUEST["correctoC"])) {
 				print "<li class=nav-link style='color: green'> $_REQUEST[correctoC] </li>";
-			}
+                }
+            }
 			if (isset($_REQUEST["cerrar"])) {
 				print "<li class=nav-link style='color: black'> $_REQUEST[cerrar] </li>";
 			}
@@ -86,3 +85,8 @@ session_start();
     </footer>    
 </body>
 </html>
+<?php
+} else {
+    header('location: index.php?errorI=Sesion finalizada');
+}
+?>

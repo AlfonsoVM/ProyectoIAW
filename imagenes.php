@@ -1,5 +1,7 @@
 <?php
 session_start();
+if (isset($_SESSION['nombreUsuario']) && isset($_SESSION['estado'])) {
+$usuario = $_SESSION['nombreUsuario'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,7 +27,7 @@ session_start();
     <div class="collapse navbar-collapse" id="navbarsDefault">
         <ul class="navbar-nav mr-auto align-items-center">
     		<li class="nav-item">
-				<h3><a href="index.php">PhotoIAW</a> / Registrarse</h3>
+            <h3><a href="index.php">PhotoIAW</a> / <a href="formuimagen.php">Imágenes</a> / Tus imágenes</h3>
 			</li>
     	</ul>
     	<ul class="navbar-nav ml-auto align-items-center">
@@ -50,7 +52,7 @@ session_start();
 				if (isset($_REQUEST["correctoC"])) {
 				print "<li class=nav-link style='color: green'> $_REQUEST[correctoC] </li>";
                 }
-      }
+            }
 			if (isset($_REQUEST["cerrar"])) {
 				print "<li class=nav-link style='color: black'> $_REQUEST[cerrar] </li>";
 			}
@@ -63,42 +65,50 @@ session_start();
 	
     <section class="mt-4 mb-5">
     <div class="container-fluid">
-    	<div class="row">
-    		<div class="card-columns">
-				  <div class='card card-pin'>
-          <form action="signinf.php" method="post">
-            <div class="form-group">
-              <label for="correo">Correo Electrónico</label>
-              <input type="email" class="form-control" id="correo" name="correo" aria-describedby="emailHelp" required>
-              <small id="emailHelp" class="form-text text-muted">Nunca compartiremos tu dirección de correo con nadie.</small>
-            </div>
-            <div class="form-group">
-              <label for="usuario">Usuario</label>
-              <input type="text" class="form-control" id="usuario" name="usuario" required>
-            </div>
-            <div class="form-group">
-              <label for="contraseña">Contraseña</label>
-              <input type="password" class="form-control" id="contraseña" name="contraseña" required>
-            </div>
-            <button type="submit" class="btn btn-dark">Registrarse</button>
-            <br><br>
-            <?php
-            if (isset($_REQUEST["errorR"])) {
-                  print "<p style='color: red'> $_REQUEST[errorR] </p>";
-              }
-              if (isset($_REQUEST["correctoR"])) {
-                print "<p style='color: green'> $_REQUEST[correctoR] </p>";
-              }
-            ?>
-            
-            <div class="form-group">
-              <p>¿Ya tienes cuenta? <a href="login.php" id="login" name="login">Inicia sesión aquí</a></p>
-            </div>
+        <?php
+            if (isset($_REQUEST["errorB"])) {
+                print "<li class=nav-link style='color: red'> $_REQUEST[errorB] </li>";
+            }
+            if (isset($_REQUEST["correctoB"])) {
+				print "<li class=nav-link style='color: green'> $_REQUEST[correctoB] </li>";
+			}
+        ?>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                <th scope="col">#</th>
+                <th scope="col">Usuario</th>
+                <th scope="col">Imagen</th>
+                <th scope="col">Titulo</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $conexion = mysqli_connect("localhost", "root", "", "vargasacedo") or die("Problemas con la conexión");
+                $registros = mysqli_query($conexion, "SELECT usuario, imagen, titulo, fecha 
+                                                        FROM imagenes WHERE usuario = '$usuario'")
+                    or die("Problemas en la consulta:".mysqli_error($conexion));
 
-          </form>
-          </div>
-    		</div>
-    	</div>
+                $contador=0;
+                while ($reg = mysqli_fetch_array($registros)) {
+                    $contador=$contador+1;
+                    echo "<tr>";
+                        echo "<th>" . $contador . "</th>";
+                        echo "<th>" . $reg['usuario'] . "</th>";
+                        echo "<th><img class='card-img' src='imagenes\\".$reg['usuario']."\\".$reg['imagen']."' alt='Card image'></th>";
+                        echo "<th>" . $reg['titulo'] . "</th>";
+                        echo "<th>" . $reg['fecha'] . "</th>";
+                        echo "<td><a class='btn btn-danger btn-sm' href='adminborrar.php?id=$reg[imagen]&usuario=$reg[usuario]&nombretabla=imagenes&tipo=imagen' > Borrar </a>";
+                    echo "</tr>";
+                }
+                echo "</table>";
+                                
+                mysqli_close($conexion);
+                ?>
+            </tbody>
+        </table>
     </div>
     </section>    
     </main>
@@ -110,3 +120,8 @@ session_start();
     </footer>    
 </body>
 </html>
+<?php
+} else {
+    header('location: index.php?errorI=Sesion finalizada');
+}
+?>
